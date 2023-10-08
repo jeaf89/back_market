@@ -6,7 +6,7 @@ const isAuth = (req, res, next) => {
             throw new Error('No tienes permiso para realizar esta acción');
         
         const token = req.headers.authorization.split(' ')[1];
-        const payload = jwt.verify(token, process.env.JWT_SECRET);
+        const payload = jwt.verify(token, "clavesecreta");
 
         if (!payload) {
             throw new Error('No tienes permiso para realizar esta acción');

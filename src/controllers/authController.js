@@ -29,20 +29,23 @@ const login = async (req, res) => {
         }
         const hashedPassword = user.password;
         const match = await bcrypt.compare(password, hashedPassword);
-
+        console.log(match)
         if (match) {
         const token = jwt.sign(
             { email: user.email, user_id: user.user_id },
-            process.env.JWT_SECRET
+            "clavesecreta"
         );
+        console.log(token)
+
         //ES NECESARIA UNA RESPUESTA PARA DESPLEGAR EL NOMBRE DEL USUARIO?
-        res
+        res//.send(token)
             .status(200)
             .json(token);
         } else {
             throw new Error('Usuario o contraseña incorrectas');
         }
     } catch (error) {
+    console.log(error);
     res.status(500).json({ error: error.message });
     }
 };
